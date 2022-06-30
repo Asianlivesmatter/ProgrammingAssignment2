@@ -3,14 +3,14 @@
 
 
 makeCacheMatrix <- function(x = matrix(sample(1:100,9),3,3)) {
-        s <- NULL
+        m <- NULL
         set <- function(y) {
                 x <<- y
-                s <<- NULL
+                m <<- NULL
         }
         get <- function() x
         setsolve <- function(solve) s <<- solve
-        getsolve <- function() s
+        getsolve <- function() m
         list(set = set, get = get,
              setsolve = setsolve,
              getsolve = getsolve)
@@ -21,13 +21,13 @@ makeCacheMatrix <- function(x = matrix(sample(1:100,9),3,3)) {
 
 cacheSolve <- function(x, ...) {
         ## Return a matrix that is the inverse of 'x'
-        s <- x$getsolve()
-        if(!is.null(s)) {
+        m <- x$getsolve()
+        if(!is.null(m)) {
                 message("getting inversed matrix")
-                return(s)
+                return(m)
         }
         data <- x$get()
-        s <- solve(data, ...)
-        x$setsolve(s)
-        s
+        m <- solve(data, ...)
+        x$setsolve(m)
+        m
 }
